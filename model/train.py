@@ -6,7 +6,7 @@ from sklearn.metrics import mean_absolute_error
 
 # load the csv file dataset
 
-df = pd.read_csv("international_matches.csv")
+df = pd.read_csv("data/international_matches.csv")
 print("loaded data:", df.shape)
 
 # missing colomns
@@ -16,7 +16,7 @@ cols_with_missing = [
     "away_avg_pace", "away_avg_shooting", "away_avg_passing",
 ]
 
-for col in cols_with_missing():
+for col in cols_with_missing:
     df[col] = df[col].fillna(df[col].mean())
 
 # featured cols
@@ -39,7 +39,7 @@ y_away = df["away_goals"]
 
 # train, test and split
 
-x_test, x_train, y_away_test, y_away_train, y_home_test, y_home_train = train_test_split(
+x_train, x_test, y_away_train, y_away_test, y_home_train, y_home_test = train_test_split(
     x, y_away, y_home, test_size=0.2, random_state=42
 )
 
@@ -59,7 +59,7 @@ home_pred = home_model.predict(x_test)
 away_pred = away_model.predict(x_test)
 
 home_mae = mean_absolute_error(y_home_test, home_pred)
-away_mae = mean_absolute_error(y_away_train, away_pred)
+away_mae = mean_absolute_error(y_away_test, away_pred)
 
 print(f"\nhome goals mae:{home_mae:.3f} ")
 print(f"\naway goal mae:{away_mae:.3f}")
