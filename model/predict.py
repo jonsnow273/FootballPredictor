@@ -42,8 +42,8 @@ def predict_score(home_team, away_team):
     combined_data['attack_diff'] = home_row['home_avg_attack'] - away_row['away_avg_attack']
     combined_data['defense_diff'] = home_row['home_avg_defense'] - away_row['away_avg_defense']
 
-    combined_data['is_neutral'] = 1
-    combined_data['is_world_cup'] = 1
+    combined_data['is_neutral'] = 0
+    combined_data['is_world_cup'] = 0
     combined_data['is_continental'] = 0
 
     print("home_elo:", combined_data['home_elo'])
@@ -69,9 +69,8 @@ def predict_score(home_team, away_team):
             scorelines.append((home_g, away_g, probability))
 
     scorelines = sorted(scorelines, key=lambda x: x[2], reverse=True)
-    top = scorelines[0]
-    return top
+    return scorelines[:5]
 
 result = predict_score("Portugal", "Croatia")
-home_g, away_g, prob = result
-print(f" predicted score: {home_g}-{away_g}: {prob*100:.1f}%")
+for home_g, away_g, prob in result:
+    print(f"{home_g}-{away_g}: {prob*100:.1f}%")

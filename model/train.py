@@ -42,8 +42,8 @@ y_away = df["away_goals"]
 
 # train, test and split
 
-x_train, x_test, y_away_train, y_away_test, y_home_train, y_home_test = train_test_split(
-    X_scaled, y_away, y_home, test_size=0.2, random_state=42
+x_train, x_test, y_home_train, y_home_test, y_away_train, y_away_test = train_test_split(
+    X_scaled, y_home, y_away, test_size=0.2, random_state=42
 )
 
 # train 2 diffrent poisson models
