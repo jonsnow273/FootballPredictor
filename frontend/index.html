@@ -3,9 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="sample page">
     <title>FootHub</title>
 </head>
 <body>
-    
+    <div class="container" id="root">
+        <div id="header">
+            <h1>Football game predictor</h1>
+        </div>
+        <div class="tab-buttons">
+            <button id="upcoming-tab-btn" class="tab-btn active">Upcoming games</button>
+            <button id="past-tab-btn" class="tab-btn">Past games</button>
+        </div>
+        <div id="upcoming-fixtures-container">
+            <div class="fixtures-card">
+                <img class="home-logo" src="" alt="">
+                <span class="home-team"></span>
+                <button class="btn">Predict</button>
+                <span class="away-team"></span>
+                <img class="away-logo" src="" alt="">
+            </div>
+        </div>
+        <div id="past-fixtures-container" style="display: none;">
+            <div class="past-fixtures-card">
+                <img class="home-logo-past" src="" alt="">
+                <span class="home-team-result"></span>
+                <p>Actual score</p>
+                <p class="home-team-score"></p>
+                <p>-</p>
+                <p class="away-team-score"></p>
+                <span class="away-team-result"></span>
+                <img class="away-team-logo" src="" alt="">
+                <p class="predicted-score">Predicted score:<span class="PredictedScore"></span></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
