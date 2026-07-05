@@ -1,0 +1,259 @@
+:root {
+  --bg: #121212;
+  --card-bg: #1e1e1e;
+  --card-border: #2c2c2c;
+  --accent: #3fa34d;      /* pitch green */
+  --accent-dark: #2d7a39;
+  --text-main: #f2f2f2;
+  --text-muted: #9a9a9a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+#header {
+  text-align: center;
+  padding: 28px 0 20px;
+}
+
+#header h1 {
+  margin: 0;
+  color: var(--accent);
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #0d0d0d;
+  padding: 10px 0;
+  border-top: 1px solid var(--card-border);
+  z-index: 10;
+}
+
+.tab-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab-btn:hover {
+  color: var(--text-main);
+}
+
+.tab-btn.active {
+  color: var(--accent);
+  background: rgba(63, 163, 77, 0.12);
+  border-bottom: 3px solid var(--accent);
+}
+
+#upcoming-fixtures-container,
+#past-fixtures-container {
+  padding-bottom: 70px;
+  transition: opacity 0.2s ease;
+}
+
+.tab-content-hidden {
+  opacity: 0;
+  display: none;
+}
+
+.fixtures-card,
+.past-fixtures-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fixtures-card:hover,
+.past-fixtures-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  border-color: var(--accent);
+}
+
+.fixtures-card.show,
+.past-fixtures-card.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fixtures-card.show:hover,
+.past-fixtures-card.show:hover {
+  transform: translateY(-3px);
+}
+
+.fixtures-card > img,
+.past-fixtures-card > img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #fff;
+  padding: 4px;
+}
+
+.home-team,
+.away-team,
+.home-team-result,
+.away-team-result {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.fixtures-card {
+  flex-wrap: wrap;
+}
+
+.fixtures-card img.home-logo {
+  order: 1;
+}
+.fixtures-card span.home-team {
+  order: 2;
+  flex: 1;
+  text-align: left;
+  margin-left: 4px;
+}
+
+.fixtures-card .btn {
+  order: 3;
+  background: var(--accent);
+  color: #0d0d0d;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.fixtures-card .btn:hover {
+  background: var(--accent-dark);
+  color: var(--text-main);
+}
+
+.fixtures-card .btn.loading {
+  color: transparent;
+  position: relative;
+  pointer-events: none;
+  background: var(--accent-dark);
+}
+
+.fixtures-card .btn.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-top-color: #0d0d0d;
+  border-radius: 50%;
+  animation: btn-spin 0.6s linear infinite;
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+.fixtures-card .away-team {
+  order: 4;
+  flex: 1;
+  text-align: right;
+  margin-right: 4px;
+}
+
+.fixtures-card .away-logo {
+  order: 5;
+}
+
+.past-fixtures-card {
+  flex-direction: column;
+  text-align: center;
+}
+
+.past-fixtures-card .score-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin: 6px 0;
+}
+
+.home-team-score,
+.away-team-score {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  min-width: 30px;
+}
+
+.predicted-score {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.predicted-score .PredictedScore {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.skeleton-card {
+  height: 92px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  background: linear-gradient(
+    90deg,
+    var(--card-bg) 25%,
+    #2a2a2a 37%,
+    var(--card-bg) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
